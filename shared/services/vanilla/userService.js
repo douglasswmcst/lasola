@@ -12,8 +12,8 @@ async function getUser() {
   if (documentSnapshot.exists()) {
     console.log("Document data:", documentSnapshot.data());
     // Store data to persistence layer using zustand vanilla
-    const updateUser = useStore(store, (state) => state.updateUser);
-    updateUser(user);
+    // const updateUser = useStore(store, (state) => state.updateUser);
+    const updateUser = store.setState(documentSnapshot.data());
     return documentSnapshot.data();
   } else {
     // docSnap.data() will be undefined in this case

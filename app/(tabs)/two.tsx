@@ -20,7 +20,8 @@ export default function TabTwoScreen() {
 
     fetchUser();
   });
-  const globalUserVanilla = useStore(store, (state) => state.user);
+  // const globalUserVanilla = useStore(store, (state) => state.user);
+  const globalUserVanilla = store.getState();
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Vanilla Global Store</Text>

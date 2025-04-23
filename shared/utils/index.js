@@ -10,7 +10,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-async function register(email, password) {
+async function REGISTER(email, password) {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed up
@@ -24,7 +24,7 @@ async function register(email, password) {
     });
 }
 
-async function login(email, password) {
+async function LOGIN(email, password) {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
@@ -38,4 +38,4 @@ async function login(email, password) {
     });
 }
 
-export { register, login };
+export { REGISTER, LOGIN };

@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 
 import { useColorScheme } from "@/components/useColorScheme";
+import OnBoardingScreen from "./onboard";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -26,6 +27,7 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const user = null;
   const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     ...FontAwesome.font,
@@ -45,7 +47,9 @@ export default function RootLayout() {
   if (!loaded) {
     return null;
   }
-
+  if (!user) {
+    return <OnBoardingScreen />;
+  }
   return <RootLayoutNav />;
 }
 

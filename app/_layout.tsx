@@ -7,11 +7,13 @@ import {
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "react-native-reanimated";
 
 import { useColorScheme } from "@/components/useColorScheme";
 import OnBoardingScreen from "./onboard";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/lib/firebaseConfig";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -27,7 +29,20 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const user = null;
+  const [user, setUser] = useState("");
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log("STATUS OF USER", user);
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/auth.user
+      const uid = user.uid;
+      setUser(uid);
+      // ...
+    } else {
+      // User is signed out
+      // ...
+    }
+  });
   const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     ...FontAwesome.font,

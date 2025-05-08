@@ -10,7 +10,7 @@ async function getUser() {
   const documentSnapshot = await getDoc(documentReference);
 
   if (documentSnapshot.exists()) {
-    console.log("Document data:", documentSnapshot.data());
+    // console.log("Document data:", documentSnapshot.data());
     // Store data to persistence layer using zustand vanilla
     // const updateUser = useStore(store, (state) => state.updateUser);
     const updateUser = store.setState(documentSnapshot.data());

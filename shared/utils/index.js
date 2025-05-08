@@ -8,6 +8,7 @@ import { auth } from "../../lib/firebaseConfig";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 
 async function REGISTER(email, password) {
@@ -38,4 +39,16 @@ async function LOGIN(email, password) {
     });
 }
 
-export { REGISTER, LOGIN };
+async function LOGOUT() {
+  return signOut(auth)
+    .then((response) => {
+      // Sign-out successful.
+      console.log("user succesfully logout", response);
+    })
+    .catch((error) => {
+      // An error happened.
+      console.log(error);
+    });
+}
+
+export { REGISTER, LOGIN, LOGOUT };

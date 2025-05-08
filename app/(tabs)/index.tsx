@@ -1,9 +1,10 @@
-import { StyleSheet } from "react-native";
+import { Button, StyleSheet } from "react-native";
 import { Text, View } from "@/components/Themed";
 import { getUser } from "@/shared/services/userService";
 import { useState, useEffect } from "react";
 import { useStore } from "@/shared/store";
 import { DocumentData } from "firebase/firestore";
+import { LOGOUT } from "@/shared/utils";
 
 export default function TabOneScreen() {
   const [user, setUser] = useState<DocumentData | undefined>();
@@ -11,15 +12,19 @@ export default function TabOneScreen() {
     const fetchUser = async () => {
       try {
         const user = await getUser();
-        console.log("User data:", user);
+        // console.log("User data:", user);
         setUser(user);
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        // console.error("Error fetching user data:", error);
       }
     };
 
     fetchUser();
   });
+
+  const handleLogout = () => {
+    LOGOUT();
+  };
 
   const updateUser = useStore((state) => state.updateUser);
   updateUser(user);
@@ -51,6 +56,7 @@ export default function TabOneScreen() {
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
+      <Button title="Logout" onPress={handleLogout} color="#841584" />
     </View>
   );
 }

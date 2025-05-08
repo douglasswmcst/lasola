@@ -7,7 +7,7 @@ async function getUser() {
   const documentSnapshot = await getDoc(documentReference);
 
   if (documentSnapshot.exists()) {
-    console.log("Document data:", documentSnapshot.data());
+    // console.log("Document data:", documentSnapshot.data());
     return documentSnapshot.data();
   } else {
     // docSnap.data() will be undefined in this case
